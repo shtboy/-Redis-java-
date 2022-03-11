@@ -1,0 +1,52 @@
+spring:
+  ## mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/lamer_combination?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useUnicode=true
+    username: root
+    password: root
+  ## redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 1
+    jedis:
+      pool:
+        # 连接池中的最大空闲连接
+        max-idle: 6
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: -1
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 1000
+        # 连接池中的最小空闲连接
+        min-idle: 4
+
+
+## 使用logback框架记录日志
+logging:
+  config: classpath:logback-spring.xml
+
+server:
+  port: 9527
+  servlet:
+    context-path: /
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mappers/**/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 0
+      # 删除后
+      logic-delete-value: 1
+
+
+
+
+
+
+
