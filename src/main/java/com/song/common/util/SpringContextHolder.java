@@ -1,4 +1,4 @@
-package com.morefun.common.util;
+package com.song.common.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

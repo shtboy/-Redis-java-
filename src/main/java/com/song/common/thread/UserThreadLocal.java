@@ -1,4 +1,4 @@
-package com.morefun.common.thread;
+package com.song.common.thread;
 
 /**
  * @author Song

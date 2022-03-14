@@ -1,6 +1,6 @@
-package com.morefun.common.config.intrercaptor;
+package com.song.common.config.intrercaptor;
 
-import com.morefun.common.config.handler.IdentityHandler;
+import com.song.common.config.handler.IdentityHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

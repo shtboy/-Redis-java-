@@ -1,6 +1,6 @@
-package com.morefun.common.constant;
+package com.song.common.constant;
 
-import com.morefun.common.util.DrawUtil;
+import com.song.common.util.DrawUtil;
 
 /**
  * @author Song
@@ -19,13 +19,18 @@ public class RedisKeyConstant {
     private static String CURRENT_ROUND = "CURRENT_ROUND";
 
 
+    /**
+     * 拼接一个当前轮的抽奖记录缓存key
+     *
+     * @param openId
+     * @return
+     */
     public static String buildCurrentDrawRecordKey(String openId) {
-
         Integer currentRound = DrawUtil.getCurrentRound();
-        return currentRound.toString()+"" + ":" + openId;
+        return currentRound.toString() + "" + ":" + openId;
     }
 
     public static String buildPreDrawRecordKey(String openId) {
-        return 1+"" + ":" + openId;
+        return 1 + "" + ":" + openId;
     }
 }

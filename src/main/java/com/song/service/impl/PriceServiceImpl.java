@@ -1,12 +1,13 @@
-package com.morefun.service.impl;
+package com.song.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.morefun.common.constant.RedisKeyConstant;
-import com.morefun.domain.Price;
-import com.morefun.service.PriceService;
+import com.song.common.constant.RedisKeyConstant;
+import com.song.common.util.DrawUtil;
+import com.song.domain.Price;
+import com.song.service.PriceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Song
@@ -50,6 +50,8 @@ public class PriceServiceImpl implements PriceService {
         // 随机到要抽中的奖品索引 = 0 到 当前剩余奖品数
         Long remainTotal = listOperations.size(RedisKeyConstant.DEFAULT_PRICE_POOL);
         log.info("==抽奖开始==");
+        // 先确定当前抽到第几轮了
+        Integer currentRound = DrawUtil.getCurrentRound();
         int k = 0;
         // 处理随机数异常
         try {
@@ -91,8 +93,8 @@ public class PriceServiceImpl implements PriceService {
         log.debug("[清理原数据状态:{}]", delete);
         // 设置当前进行到第几轮了
         strRedisTemplate.opsForValue().set("CURRENT_ROUND", 1 + "");
-        ListOperations<String, Price> listOperations = (ListOperations<String, Price>) redisTemplate.opsForList();
 
+        ListOperations<String, Price> listOperations = (ListOperations<String, Price>) redisTemplate.opsForList();
         List<Price> list = new ArrayList<>();
         //  初始化大奖
         for (int i = 0; i < priceCount1; i++) {

@@ -1,6 +1,6 @@
-package com.morefun.service;
+package com.song.service;
 
-import com.morefun.domain.Price;
+import com.song.domain.Price;
 
 import java.util.Set;
 

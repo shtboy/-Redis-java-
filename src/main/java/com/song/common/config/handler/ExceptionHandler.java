@@ -1,7 +1,7 @@
-package com.morefun.common.config.handler;
+package com.song.common.config.handler;
 
-import com.morefun.common.constant.ErrorCode;
-import com.morefun.common.constant.MethodResult;
+import com.song.common.constant.ErrorCode;
+import com.song.common.constant.MethodResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

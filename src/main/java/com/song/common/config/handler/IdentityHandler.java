@@ -1,8 +1,8 @@
-package com.morefun.common.config.handler;
+package com.song.common.config.handler;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.morefun.common.thread.UserThreadLocal;
+import com.song.common.thread.UserThreadLocal;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 

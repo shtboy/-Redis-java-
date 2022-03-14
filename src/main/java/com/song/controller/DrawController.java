@@ -1,11 +1,11 @@
-package com.morefun.controller;
+package com.song.controller;
 
-import com.morefun.common.constant.ErrorCode;
-import com.morefun.common.constant.MethodResult;
-import com.morefun.common.constant.RedisKeyConstant;
-import com.morefun.common.thread.UserThreadLocal;
-import com.morefun.domain.Price;
-import com.morefun.service.PriceService;
+import com.song.common.constant.ErrorCode;
+import com.song.common.constant.MethodResult;
+import com.song.common.constant.RedisKeyConstant;
+import com.song.common.thread.UserThreadLocal;
+import com.song.domain.Price;
+import com.song.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,12 +25,12 @@ public class DrawController {
     @Qualifier("strRedisTemplate")
     @Autowired
     private RedisTemplate redisTemplate;
+
     @Autowired
     private PriceService priceService;
 
     /**
-     * 初始化奖品和默认第一轮抽奖
-     *
+     * 初始化奖品-默认第一轮抽奖
      * @return
      */
     @GetMapping("/init")
@@ -41,12 +41,11 @@ public class DrawController {
 
     /**
      * 切换场次
-     *
      * @return
      */
     @GetMapping("/nextRound")
     public MethodResult nextRound() {
-        Boolean aBoolean = redisTemplate.opsForValue().setIfPresent("CURRENT_ROUND", 2+"");
+        Boolean aBoolean = redisTemplate.opsForValue().setIfPresent("CURRENT_ROUND", 2 + "");
         return aBoolean == true ? MethodResult.success(null, "已切换") : MethodResult.failure(ErrorCode.data_not_found, "切换不成功,可能由于未初始化而导致");
     }
 
@@ -55,9 +54,10 @@ public class DrawController {
 
         ValueOperations valueOperations = redisTemplate.opsForValue();
         String identity = UserThreadLocal.getUser();
-        // 判断有没有重复点击
-        String current = RedisKeyConstant.buildCurrentDrawRecordKey(identity);
-        if (redisTemplate.hasKey(current)) {
+        // 判断有没有重复点击  根据
+        // 当前用户抽奖记录的key
+        String repeatCommit = RedisKeyConstant.buildCurrentDrawRecordKey(identity);
+        if (redisTemplate.hasKey(repeatCommit)) {
             return MethodResult.failure(ErrorCode.no_operation_authority, "当前场次参与过了,不要重复点击");
         }
 
@@ -68,13 +68,15 @@ public class DrawController {
             return MethodResult.failure(ErrorCode.data_was_used, "由于中过大奖,不可重复中奖");
         }
 
-
+        // 从奖池里随机一个奖品  返回bull则没抽中
         Price price = priceService.doDraw();
         if (price != null) {
-            valueOperations.set(current, price.getType());
+            // 抽到了 添加记录
+            valueOperations.set(repeatCommit, price.getType());
             System.out.println("用户" + identity + "中奖了,已添加缓存");
             return MethodResult.success(price);
         }
+        // 没抽到 返回
         return MethodResult.failure(ErrorCode.data_was_used, "没抽中");
     }
 }

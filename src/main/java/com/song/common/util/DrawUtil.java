@@ -1,13 +1,7 @@
-package com.morefun.common.util;
+package com.song.common.util;
 
 import cn.hutool.core.convert.Convert;
-import org.springframework.beans.BeansException;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.jca.context.SpringContextResourceAdapter;
 import org.springframework.stereotype.Component;
 
 /**

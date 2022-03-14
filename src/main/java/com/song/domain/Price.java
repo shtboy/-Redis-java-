@@ -1,4 +1,4 @@
-package com.morefun.domain;
+package com.song.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,13 +1,8 @@
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.morefun.LuckDrawApplication;
-import com.morefun.domain.Price;
+import com.song.LuckDrawApplication;
+import com.song.domain.Price;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;

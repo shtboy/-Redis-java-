@@ -1,4 +1,5 @@
-package com.morefun.common.constant;
+package com.song.common.constant;
+
 
 
 import java.io.Serializable;

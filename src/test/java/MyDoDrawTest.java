@@ -1,6 +1,6 @@
-import com.morefun.LuckDrawApplication;
-import com.morefun.domain.Price;
-import com.morefun.service.PriceService;
+import com.song.LuckDrawApplication;
+import com.song.domain.Price;
+import com.song.service.PriceService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.morefun.common.constant;
+package com.song.common.constant;
 
 /**
  * 全局错误代码
